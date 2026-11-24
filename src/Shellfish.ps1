@@ -14,7 +14,7 @@
   Displays the license and exits
 
   .PARAMETER InputPath 
-  path to your Fish file to run
+  Path to your Fish shell script
 #>
 
 #define parameters
@@ -39,6 +39,10 @@ if ($Help)
   Write-Output "PARAMETERS"
   Write-Output "    -Help, --H"
   Write-Output "        Displays this message and exits"
+  Write-Output "    -License, --L"
+  Write-Output "        Displays the license and exits"
+  Write-Output "    InputPath"
+  Write-Output "        Path to your Fish shell script"
 }
 elseif ($License) 
 {
