@@ -1,3 +1,5 @@
+ [CmdletBinding(PositionalBinding=$false)]
+ 
  <#
   .SYNOPSIS
   Fish interpreter written in Powershell
@@ -10,6 +12,9 @@
 
   .PARAMETER License 
   Displays the license and exits
+
+  .PARAMETER InputPath 
+  path to your Fish file to run
 #>
  
  #define parameters
@@ -18,7 +23,9 @@
     [switch]$Help,
 
     [Alias('L')]
-    [switch]$License
+    [switch]$License,
+
+    [string]$InputPath
  )
 
  if ($Help)
@@ -60,3 +67,12 @@
    Write-Output "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE"
    Write-Output "SOFTWARE."
  }
+# Run input file
+elseif ($InputPath -ne "")
+{
+
+}
+# Run REPL
+else {
+   
+}
