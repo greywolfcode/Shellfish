@@ -8,6 +8,30 @@ function Get-Tokens
     param (
         [string]$File
     )
+    #create state
+    $State = [PSCustomObject]@{
+        Index = 0
+        File = $File
+    }
 
-    $Tokens = @()
+    $Lines = $File -split "`n"
+
+    foreach ($Line in $Lines)
+    {   while ($State.Index -le $Line.Length)
+        {
+            $CurrentChar = Get-Next -State $State -Line $Line
+            Write-Output $CurrentChar
+        }
+    }
+}
+
+function Get-Next
+{
+    param (
+        [PSCustomObject]$State,
+        [string]$Line
+    )
+
+    $State.Index += 1
+    return $Line[($State.Index - 1)]
 }
