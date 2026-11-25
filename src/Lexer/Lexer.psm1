@@ -20,7 +20,11 @@ function Get-Tokens
     {   while ($State.Index -le $Line.Length)
         {
             $CurrentChar = Get-Next -State $State -Line $Line
-            Write-Output $CurrentChar
+            
+            switch  -CaseSensitive ($CurrentChar) 
+            {
+                default {} #TODO Throw Error
+            }
         }
     }
 }
