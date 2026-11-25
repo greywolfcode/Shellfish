@@ -1,3 +1,11 @@
+<#
+.SYNOPSIS
+    Datatype storage for Shellfish lexer/parser
+
+.DESCRIPTION
+    A collection of datatypes for storing data from the apreser and lexer
+#>
+
 enum TokenType
 {
     #commands
@@ -62,4 +70,21 @@ enum TokenType
     Asterisk
     DoubleAsterisk
     Slash
+}
+
+class Token 
+{
+    [string]$Lexeme
+    [string]$FileName
+    [string]$Line
+    [int]$Location
+    [TokenType]$Type
+
+     Token([string]$Lexeme, [string]$FileName, [string]$Line, [int]$Location, [TokenType]$Type) {
+        $this.Lexeme = $Lexeme
+        $this.FileName = $FileName
+        $this.Line = $Line
+        $this.Location = $Location
+        $this.Type = $Type
+    }
 }
