@@ -12,6 +12,7 @@ function Get-Tokens
     $State = [PSCustomObject]@{
         Index = 0
         File = $File
+        Tokens = [System.Collections.Generic.List[Token]]::new()
     }
 
     $Lines = $File -split "`n"
@@ -29,6 +30,8 @@ function Get-Tokens
             }
         }
     }
+
+    return $State.Tokens
 }
 
 function Get-Next
@@ -40,4 +43,28 @@ function Get-Next
 
     $State.Index += 1
     return $Line[($State.Index - 1)]
+}
+function Test-Next
+{
+    param (
+        [PSCustomObject]$State,
+        [string]$Line,
+        [string]$Char
+    )
+
+    return ($Line[($State.Index)] -eq $Char)
+}
+function Add-Token
+{
+    param (
+        [PSCustomObject]$State,
+        [string]$FileName,
+        [string]$Line,
+        [string]$Lexeme,
+        [TokenType]$Type
+    )
+        $Location = State.Index - $Lexeme.Length
+        $Token = [Token]::new($Lexeme, $FileName, $Line, $Location, $Type)
+
+        $State.Tokens.Add($Token)
 }
