@@ -17,7 +17,9 @@ function Get-Tokens
     $Lines = $File -split "`n"
 
     foreach ($Line in $Lines)
-    {   while ($State.Index -le $Line.Length)
+    {   
+        State.Index = 0 #parsing line by line, so index needs to reset
+        while ($State.Index -le $Line.Length)
         {
             $CurrentChar = Get-Next -State $State -Line $Line
             
