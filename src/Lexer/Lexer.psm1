@@ -3,7 +3,7 @@
     Lexer for Fish language
 #>
 
-function Tokanize-String 
+function Get-Tokens 
 {
     param (
         [string]$File

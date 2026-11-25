@@ -75,6 +75,6 @@ else
   while ($true)
   {
     $Code = Read-Host "> "
-    Tokanize-String $Code
+    Get-Tokens -File $Code
   }
 }
