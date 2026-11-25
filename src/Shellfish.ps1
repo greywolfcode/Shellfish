@@ -1,30 +1,32 @@
-[CmdletBinding(PositionalBinding=$false)]
-
 <#
-  .SYNOPSIS
-  Fish interpreter written in Powershell
+.SYNOPSIS
+Fish interpreter written in Powershell
 
-  .DESCRIPTION
-  Fish REPL and Fish script interpreter that runs on Powershell. 
+.DESCRIPTION
+Fish REPL and Fish script interpreter that runs on Powershell. 
 
-  .PARAMETER Help 
-  Displays this message and exits
+.PARAMETER Help 
+Displays this message and exits
 
-  .PARAMETER License 
-  Displays the license and exits
+.PARAMETER License 
+Displays the license and exits
 
-  .PARAMETER InputPath 
-  Path to your Fish shell script
+.PARAMETER InputPath 
+Path to your Fish shell script
 #>
 
+[CmdletBinding(PositionalBinding=$false)]
 #define parameters
 param (
-   [Alias('H')]
-   [switch]$Help,
-   [Alias('L')]
-   [switch]$License,
-   [string]$InputPath
-)
+  [Alias('H')]
+  [switch]$Help,
+  [Alias('L')]
+  [switch]$License,
+  [string]$InputPath
+  )
+
+Import-Module -Name "$PSScriptRoot\Lexer\Lexer.psd1"
+
 if ($Help)
 {
   Write-Output "NAME"
@@ -70,5 +72,9 @@ elseif ($InputPath -ne "")
 # Run REPL
 else 
 {
-   
+  while ($true)
+  {
+    $Code = Read-Host "> "
+    Tokanize-String $Code
+  }
 }
