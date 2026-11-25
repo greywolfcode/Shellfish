@@ -22,5 +22,12 @@ Help output :
 ![Help Output](./journal_one_help_output.png)
 
 
+## Journal 2 - Data Storage
 
+### Time: 58 Minutes
+
+In this session, I set up a module for holding data storage components. As PowerShell has the option to be object oriented, I decided to use a class for Token storage, and I decided to use an Enum for storing the possible token types. To figure out which token types I needed, I read through the [fish documentation](https://fishshell.com/docs/current/language.html#combining-different-expansions), a slightly tedious task, but at least it got me more familiar with the fish language. For token types that conflicted with PowerShell keywords, I tried a bunch of different options form a shortened form to appending "Block", but ended up with appending "Stmt" or "Expr" to the end of the type to differentiate it.
+
+
+All of this is organized into a PowerShell module, so it hopefully will be useable in each system of the interpreter. For my modules, I'm basing the file organization on [this article](https://dev.to/playfulprogramming/how-to-write-better-powershell-scripts-architecture-and-best-practices-emh).
 
