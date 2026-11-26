@@ -6,7 +6,8 @@
 function Get-Tokens 
 {
     param (
-        [string]$File
+        [string]$File,
+        [string]$FileName
     )
     #create state
     $State = [PSCustomObject]@{
@@ -29,11 +30,11 @@ function Get-Tokens
                 '&' {
                     if (Test-Next -State $State -Line $Line -Char '&') 
                     {
-                        Add-Token -State $State -Line $Line -Lexeme '&&' -Type And
+                        Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '&&' -Type And
                     } 
                     else 
                     {
-                        Add-Token -State $State -Line $Line -Lexeme '&' -Type Ampersand
+                        Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '&' -Type Ampersand
                     }
                 }
                 default {} #TODO Throw Error
