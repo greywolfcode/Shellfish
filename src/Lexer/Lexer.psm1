@@ -27,6 +27,7 @@ function Get-Tokens
             
             switch  -CaseSensitive ($CurrentChar) 
             {
+                '#' {$State.Index = $Line.Length}
                 '&' {
                     if (Test-Next -State $State -Line $Line -Char '&') 
                     {
