@@ -75,6 +75,7 @@ else
   while ($true)
   {
     $Code = Read-Host "> "
-    Get-Tokens -File $Code
+    $Tokens = Get-Tokens -File $Code
+    Write-Output $Tokens
   }
 }
