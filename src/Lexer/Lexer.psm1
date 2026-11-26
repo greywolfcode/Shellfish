@@ -29,13 +29,12 @@ function Get-Tokens
                 '&' {
                     if (Test-Next -State $State -Line $Line -Char '&') 
                     {
-                        Add-Token -State $State -Line $Line -Char '&&' -Type And
+                        Add-Token -State $State -Line $Line -Lexeme '&&' -Type And
                     } 
                     else 
                     {
-                        Add-Token -State $State -Line $Line -Char '&' -Type Ampersand
+                        Add-Token -State $State -Line $Line -Lexeme '&' -Type Ampersand
                     }
-
                 }
                 default {} #TODO Throw Error
             }
@@ -79,8 +78,8 @@ function Add-Token
         [string]$Lexeme,
         [TokenType]$Type
     )
-        $Location = $State.Index - $Lexeme.Length
-        $Token = [Token]::new($Lexeme, $FileName, $Line, $Location, $Type)
+    $Location = $State.Index - $Lexeme.Length
+    $Token = [Token]::new($Lexeme, $FileName, $Line, $Location, $Type)
 
-        $State.Tokens.Add($Token)
+    $State.Tokens.Add($Token)
 }
