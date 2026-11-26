@@ -70,6 +70,7 @@ enum TokenType
     Asterisk
     DoubleAsterisk
     Slash
+    Ampersand
 }
 
 class Token 

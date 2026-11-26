@@ -19,13 +19,24 @@ function Get-Tokens
 
     foreach ($Line in $Lines)
     {   
-        State.Index = 0 #parsing line by line, so index needs to reset
+        $State.Index = 0 #parsing line by line, so index needs to reset
         while ($State.Index -le $Line.Length)
         {
             $CurrentChar = Get-Next -State $State -Line $Line
             
             switch  -CaseSensitive ($CurrentChar) 
             {
+                '&' {
+                    if (Test-Next -State $State -Line $Line -Char '&') 
+                    {
+                        Add-Token -State $State -Line $Line -Char '&&' -Type And
+                    } 
+                    else 
+                    {
+                        Add-Token -State $State -Line $Line -Char '&' -Type Ampersand
+                    }
+
+                }
                 default {} #TODO Throw Error
             }
         }
@@ -68,7 +79,7 @@ function Add-Token
         [string]$Lexeme,
         [TokenType]$Type
     )
-        $Location = State.Index - $Lexeme.Length
+        $Location = $State.Index - $Lexeme.Length
         $Token = [Token]::new($Lexeme, $FileName, $Line, $Location, $Type)
 
         $State.Tokens.Add($Token)
