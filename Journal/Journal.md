@@ -1,5 +1,9 @@
 # Journal
 
+### Total Time: 3hr 38min
+
+---
+
 ## Journal #1 - Setup
 
 ### Time: 49 minutes
@@ -31,3 +35,21 @@ In this session, I set up a module for holding data storage components. As Power
 
 All of this is organized into a PowerShell module, so it hopefully will be useable in each system of the interpreter. For my modules, I'm basing the file organization on [this article](https://dev.to/playfulprogramming/how-to-write-better-powershell-scripts-architecture-and-best-practices-emh).
 
+
+## Journal 3 - First Lexer Output
+
+### Time: 1hr 51min
+
+The Lexer is finally up and able to produce output. Currently all it can parse is single and double ampersands ("&" & "&&"), but it should be much faster add parsing for other tokens now that the infrastructure is setup.
+
+
+The first step was setting up the Lexer module itself. After having setup the DataStorage module, this went fairly smoothly. The only major problems I had were with importing the DataStorage module. Firstly, I found that importing DataStorage by placing it into NestedModules in the manifest worked better than an import at the top of the file. The other problem once I had that figured out was that I forget to point the DataStorage module manifest to the actual DataStorage code (oops). 
+
+
+Once that worked, I setup the main Lexer function, Get-Tokens. This function was originally Tokanize-String, but this required a verbose flag on import, as "Tokanize" is not part of the PowerShell approved verbs list, so I swapped it to an approved verb. This main function has a few steps. First, it splits the inputted code string into lines, and loops through them. Then, it loops until the State index reaches the end of the line. I'm not using a for loop for this so other functions that do parts of parsing can increment this index. For example, the function Test-Next tests if the next character matches the inputted one. If it does, the index is incremented and true is returned, otherwise false is returned. After parsing all the lines, the Lexer returns a List of Tokens which will eventually be passed into the Lexer. For now, the outputs are just being displayed to the screen.
+
+
+One final note is that I'm using System.Collections.Generic.List to store tokens, not the default PowerShell array. PowerShell arrays have a fixed size upon creation, and I don't know how many tokens I will have, so I'm using the collection recommended by the [docs](https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-arrays?view=powershell-7.6#generic-list).
+
+
+![Lexer Output](./journal_two_lexer_output.png)
