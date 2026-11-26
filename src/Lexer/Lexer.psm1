@@ -52,7 +52,12 @@ function Test-Next
         [string]$Char
     )
 
-    return ($Line[($State.Index)] -eq $Char)
+    if ($Line[($State.Index)] -eq $Char)
+    {
+        $State.Index += 1
+        return $true
+    }
+    return $false
 }
 function Add-Token
 {
