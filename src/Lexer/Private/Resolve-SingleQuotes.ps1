@@ -15,7 +15,26 @@ function Resolve-SingleQuotes
     while (($State.Index -le $Line.Length) -and (-not (Test-Next -State $State -Line $Line -Char "'")))
     {
         $Char = Get-Next -State $State -Line $Line
-        $null = $String.Append($Char)
+
+        if ($Char -eq '\')
+        {
+            if (Test-Next -State $State -Line $Line -Char "'")
+            {
+                $null = $String.Append("'")
+            }
+            elseif (Test-Next -State $State -Line $Line -Char "\") #needs to be seperate from else calsue so the index is incremented
+            {
+                $null = $String.Append("\")
+            }
+            else 
+            {
+                $null = $String.Append("\")
+            }
+        }
+        else 
+        {
+            $null = $String.Append($Char)
+        }
     }
 
     return $String.ToString()
