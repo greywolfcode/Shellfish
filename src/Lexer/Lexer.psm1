@@ -41,6 +41,24 @@ function Get-Tokens
                 '$' {
                     Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '$' -Type DollarSign
                 }
+                '(' {
+                    Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '(' -Type LeftRoundBracket
+                }
+                ')' {
+                    Add-Token -State $State -FileName $FileName -Line $Line -Lexeme ')' -Type RightRoundBracket
+                }
+                '[' {
+                    Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '[' -Type LeftSquareBracket
+                }
+                ']' {
+                    Add-Token -State $State -FileName $FileName -Line $Line -Lexeme ']' -Type RightSquareBracket
+                }
+                '{' {
+                    Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '{' -Type LeftCurlyBracket
+                }
+                '}' {
+                    Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '}' -Type RightCurlyBracket
+                }
                 default {} #TODO Throw Error
             }
         }
