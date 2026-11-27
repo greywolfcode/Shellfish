@@ -82,6 +82,9 @@ function Get-Tokens
                 ';' {
                     Add-Token -State $State -FileName $FileName -Line $Line -Lexeme ';' -Type SemiColon
                 }
+                '~' {
+                    Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '~' -Type Tilde
+                }
                 default {} #TODO Throw Error
             }
         }

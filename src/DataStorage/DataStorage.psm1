@@ -71,6 +71,7 @@ enum TokenType
     DoubleAsterisk
     Slash
     Ampersand
+    Tilde
 }
 
 class Token 
