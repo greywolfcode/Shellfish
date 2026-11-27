@@ -38,6 +38,16 @@ function Get-Tokens
                         Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '&' -Type Ampersand
                     }
                 }
+                '|' {
+                    if (Test-Next -State $State -Line $Line -Char '|') 
+                    {
+                        Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '||' -Type or
+                    } 
+                    else 
+                    {
+                        Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '|' -Type Pipe
+                    }
+                }
                 '$' {
                     Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '$' -Type DollarSign
                 }
