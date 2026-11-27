@@ -76,13 +76,13 @@ enum TokenType
 
 class Token 
 {
-    [string]$Lexeme
+    $Lexeme
     [string]$FileName
     [string]$Line
     [int]$Location
     [TokenType]$Type
 
-     Token([string]$Lexeme, [string]$FileName, [string]$Line, [int]$Location, [TokenType]$Type) {
+     Token($Lexeme, [string]$FileName, [string]$Line, [int]$Location, [TokenType]$Type) {
         $this.Lexeme = $Lexeme
         $this.FileName = $FileName
         $this.Line = $Line
