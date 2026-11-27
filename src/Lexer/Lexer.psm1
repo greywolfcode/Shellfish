@@ -59,6 +59,9 @@ function Get-Tokens
                 '}' {
                     Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '}' -Type RightCurlyBracket
                 }
+                ';' {
+                    Add-Token -State $State -FileName $FileName -Line $Line -Lexeme ';' -Type SemiColon
+                }
                 default {} #TODO Throw Error
             }
         }
