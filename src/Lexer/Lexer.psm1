@@ -41,11 +41,21 @@ function Get-Tokens
                 '|' {
                     if (Test-Next -State $State -Line $Line -Char '|') 
                     {
-                        Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '||' -Type or
+                        Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '||' -Type Or
                     } 
                     else 
                     {
                         Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '|' -Type Pipe
+                    }
+                }
+                '*' {
+                    if (Test-Next -State $State -Line $Line -Char '*') 
+                    {
+                        Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '**' -Type DoubleAsterisk
+                    } 
+                    else 
+                    {
+                        Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '*' -Type Asterisk
                     }
                 }
                 '$' {
