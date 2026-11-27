@@ -3,6 +3,9 @@
     Lexer for Fish language
 #>
 
+. "$PSScriptRoot\Private\Resolve-SingleQuotes.ps1"
+. "$PSScriptRoot\Private\Resolve-DoubleQuotes.ps1"
+
 function Get-Tokens 
 {
     param (
@@ -108,6 +111,14 @@ function Get-Tokens
                 }
                 '~' {
                     Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '~' -Type Tilde
+                }
+                "'" {
+                    $String = Resolve-SingleQuotes -State $State -Line $Line
+                    Add-Token -State $State -FileName $FileName -Line $Line -Lexeme $String -Type SingleQuoteString
+                }
+                '"' {
+                    $String = Resolve-DoubleQuotes -State $State -Line $Line
+                    Add-Token -State $State -FileName $FileName -Line $Line -Lexeme $String -Type DoubleQuoteString
                 }
                 default {} #TODO Throw Error
             }
