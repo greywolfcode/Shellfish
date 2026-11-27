@@ -38,6 +38,9 @@ function Get-Tokens
                         Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '&' -Type Ampersand
                     }
                 }
+                '$' {
+                    Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '$' -Type DollarSign
+                }
                 default {} #TODO Throw Error
             }
         }
