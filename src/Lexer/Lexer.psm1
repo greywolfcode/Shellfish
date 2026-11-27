@@ -58,6 +58,30 @@ function Get-Tokens
                         Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '*' -Type Asterisk
                     }
                 }
+                '>' {
+                    if (Test-Next -State $State -Line $Line -Char '>') 
+                    {
+                        Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '>>' -Type AppendStdOut
+                    } 
+                    elseif (Test-Next -State $State -Line $Line -Char '?') 
+                    {
+                        Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '>?' -Type NoClobberWrite 
+                    } 
+                    else 
+                    {
+                        Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '>' -Type Write
+                    }
+                }
+                '<' {
+                    if (Test-Next -State $State -Line $Line -Char '?') 
+                    {
+                        Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '<?' -Type ReadOrNull 
+                    } 
+                    else 
+                    {
+                        Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '<' -Type Read
+                    }
+                }
                 '$' {
                     Add-Token -State $State -FileName $FileName -Line $Line -Lexeme '$' -Type DollarSign
                 }
